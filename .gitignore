@@ -1,0 +1,51 @@
+# ── 操作系统 ──
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ── Office 锁文件与临时文件（Word/Excel 打开时产生，绝不能提交）──
+~$*
+*.tmp
+*.temp
+*.~*
+
+# ── 编辑器 / IDE ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+*.egg-info/
+
+# ── Node ──
+node_modules/
+npm-debug.log*
+
+# ── 构建产物 ──
+dist/
+build/
+out/
+
+# ── 大文件与压缩包（请走 Release / 网盘，见 README 第五节）──
+*.zip
+*.7z
+*.rar
+*.iso
+*.mp4
+*.mov
+*.psd
+
+# ── 本地草稿（不想共享的东西放这里，git 会自动忽略）──
+/scratch/
+*.local.*
+*.bak
