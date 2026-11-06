@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Generate docs/contribution-summary.md from the git history.
 
@@ -92,7 +92,7 @@ foreach ($c in $commits) {
         $byAuthor[$c.Author] = [pscustomobject]@{
             Name     = $c.Author
             Emails   = New-Object System.Collections.Generic.HashSet[string]
-            Count    = 0
+            Commits  = 0
             First    = $c.Date
             Last     = $c.Date
             Areas    = @{}
@@ -101,7 +101,7 @@ foreach ($c in $commits) {
     }
     $a = $byAuthor[$c.Author]
     [void]$a.Emails.Add($c.Email)
-    $a.Count++
+    $a.Commits++
     if ($c.Date -lt $a.First) { $a.First = $c.Date }
     if ($c.Date -gt $a.Last) { $a.Last = $c.Date }
 
@@ -116,7 +116,7 @@ foreach ($c in $commits) {
     [void]$a.Recent.Add(("{0}  {1}" -f $c.Date, $c.Subject))
 }
 
-$authors = $byAuthor.Values | Sort-Object -Property Count -Descending
+$authors = @($byAuthor.Values | Sort-Object -Property Commits -Descending)
 $total = $commits.Count
 $dates = @($commits | ForEach-Object { $_.Date } | Sort-Object)
 $head = (& git -C $repoRoot rev-parse --short HEAD 2>&1)
@@ -147,10 +147,10 @@ Add-Line '| Member | Commits | Share | First commit | Last commit | Main areas |
 Add-Line '|---|---|---|---|---|---|'
 
 foreach ($a in $authors) {
-    $share = if ($total -gt 0) { '{0:P0}' -f ($a.Count / $total) } else { '—' }
+    $share = if ($total -gt 0) { '{0:P0}' -f ($a.Commits / $total) } else { '—' }
     $areas = ($a.Areas.GetEnumerator() | Sort-Object -Property Value -Descending |
               Select-Object -First 3 | ForEach-Object { $_.Key }) -join ', '
-    Add-Line ("| {0} | {1} | {2} | {3} | {4} | {5} |" -f $a.Name, $a.Count, $share, $a.First, $a.Last, $areas)
+    Add-Line ("| {0} | {1} | {2} | {3} | {4} | {5} |" -f $a.Name, $a.Commits, $share, $a.First, $a.Last, $areas)
 }
 Add-Line ''
 Add-Line '---'
@@ -159,7 +159,7 @@ Add-Line '## Detail'
 Add-Line ''
 
 foreach ($a in $authors) {
-    Add-Line ("### {0} — {1} commit(s)" -f $a.Name, $a.Count)
+    Add-Line ("### {0} — {1} commit(s)" -f $a.Name, $a.Commits)
     Add-Line ''
     Add-Line ("Email(s): {0}" -f (($a.Emails | ForEach-Object { "``$_``" }) -join ', '))
     Add-Line ''
