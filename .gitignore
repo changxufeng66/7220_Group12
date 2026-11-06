@@ -1,42 +1,70 @@
-# ── 操作系统 ──
+# ── Operating system ─────────────────────────────────────────────────────────
 .DS_Store
-.DS_Store?
 ._*
 Thumbs.db
 ehthumbs.db
 desktop.ini
 
-# ── Office 锁文件与临时文件（Word/Excel 打开时产生，绝不能提交）──
+# ── Office / PDF lock and temporary files (never commit these) ───────────────
 ~$*
 *.tmp
 *.temp
 *.~*
 
-# ── 编辑器 / IDE ──
+# ── Editors / IDEs ───────────────────────────────────────────────────────────
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# ── Python ──
+# ── Python ───────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 .venv/
 venv/
+env/
 .ipynb_checkpoints/
 *.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# ── Node ──
+# ── Node ─────────────────────────────────────────────────────────────────────
 node_modules/
 npm-debug.log*
+yarn-error.log*
+.pnpm-store/
 
-# ── 构建产物 ──
+# ── R / Jupyter ──────────────────────────────────────────────────────────────
+.Rhistory
+.RData
+.Rproj.user
+
+# ── LaTeX build artefacts (keep the .tex, drop the rest) ─────────────────────
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+
+# ── Build output ─────────────────────────────────────────────────────────────
 dist/
 build/
 out/
 
-# ── 大文件与压缩包（请走 Release / 网盘，见 README 第五节）──
+# ── Secrets and local configuration — never commit ───────────────────────────
+.env
+.env.*
+*.key
+secrets.*
+config.local.*
+
+# ── Large files: use a GitHub Release or a shared drive instead ──────────────
+#    See docs/06-submission.md §3 and data/README.md
 *.zip
 *.7z
 *.rar
@@ -45,7 +73,7 @@ out/
 *.mov
 *.psd
 
-# ── 本地草稿（不想共享的东西放这里，git 会自动忽略）──
+# ── Local scratch (ignored, never shared) ────────────────────────────────────
 /scratch/
 *.local.*
 *.bak

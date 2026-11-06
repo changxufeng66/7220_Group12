@@ -1,181 +1,150 @@
-# 作业共享仓库（Homework Hub）
+# Group 12 — `<Project Title>`
 
-> 一个**接力式**的课程作业协作仓库：谁都可以在别人做了一半的地方继续往下做，
-> 每次交接都留下记录，不会互相覆盖。
->
-> - 可见性：**私有（Private）** —— 只有被邀请的协作者能看到
-> - 默认分支：`main` —— 受保护，所有改动都走 Pull Request
-> - 目录组织：`weekNN/作业编号/`
+Final project for **`<7220 — Course Title>`**, The University of Hong Kong.
+Team of seven · Supervisor: **`<Professor Name>`** · `<Semester, Year>`
+
+| | |
+|---|---|
+| **Status** | 🟡 Setup — scaffolding in place, project brief being drafted |
+| **Final submission** | `<YYYY-MM-DD>` 23:59 HKT |
+| **Graded deliverables** | [`deliverables/`](deliverables/) |
+| **Final report** | [`reports/final-report.md`](reports/final-report.md) |
+
+> **First task for the team:** replace every `<...>` placeholder in this file and in
+> [`docs/00-brief.md`](docs/00-brief.md). The document is the first thing the supervisor opens —
+> an unfinished README reads as an unfinished project.
 
 ---
 
-## 一、目录结构
+## 1. What we are building
+
+**Problem.** `<Two or three sentences. What is broken, for whom, and why does it matter?
+Write it so a reader outside the course can follow.>`
+
+**What we deliver.** `<One or two sentences: the artefact — system, analysis, prototype — and
+the headline result.>`
+
+**Why this team.** `<One sentence on the skills the seven of us bring.>`
+
+> Keep this section under 150 words. If you cannot state the problem in three sentences,
+> the scope is not settled yet — that is what `docs/00-brief.md` is for.
+
+---
+
+## 2. Team and ownership
+
+| # | Name | GitHub | Primary workstream | Also covers |
+|---|------|--------|--------------------|-------------|
+| 1 | `<Name>` | `@<handle>` | Project lead / coordination | `<...>` |
+| 2 | `<Name>` | `@<handle>` | `<e.g. Data pipeline>` | `<...>` |
+| 3 | `<Name>` | `@<handle>` | `<e.g. Modelling>` | `<...>` |
+| 4 | `<Name>` | `@<handle>` | `<e.g. Backend / integration>` | `<...>` |
+| 5 | `<Name>` | `@<handle>` | `<e.g. Evaluation>` | `<...>` |
+| 6 | `<Name>` | `@<handle>` | `<e.g. Report>` | `<...>` |
+| 7 | `<Name>` | `@<handle>` | `<e.g. Presentation / demo>` | `<...>` |
+
+Roles, decision rules and escalation are in [`docs/01-team.md`](docs/01-team.md).
+Who is working on what, right now, is in [`docs/03-handover-log.md`](docs/03-handover-log.md).
+
+---
+
+## 3. Repository map
 
 ```
 7220_Group12/
-├─ README.md                  ← 你正在看的这份：怎么参与
-├─ CONTRIBUTING.md            ← 提交规范：分支名、提交信息、PR 要求
-├─ docs/
-│  ├─ 接力规则.md              ← 「接力」的详细玩法与状态说明
-│  ├─ 常见问题.md              ← 冲突、撤销、push 被拒……都在这里
-│  ├─ 管理员清单.md            ← 仓库所有者（你）要做的配置
-│  └─ 发给成员的消息.md         ← 直接复制到群里的通知模板
-├─ week01/
-│  └─ lab01/                  ← 一份作业 = 一个文件夹
-│     ├─ README.md            ← 题目、要求、截止时间、当前状态
-│     ├─ 接力记录.md           ← 谁做了什么、下一步交给谁
-│     └─ （放作业文件：.md / .docx / 代码）
-├─ week02/
-└─ scripts/
-   └─ new-homework.ps1        ← 一键生成新作业骨架
+├─ README.md                 ← this file: what the project is, how to join in
+├─ CONTRIBUTING.md           ← branch, commit, PR and review rules
+├─ docs/                     ← project documentation (the "paper trail")
+│  ├─ 00-brief.md            scope, objectives, deliverables, assessment mapping
+│  ├─ 01-team.md             members, roles, ownership matrix, cadence
+│  ├─ 02-plan.md             milestones, dependencies, supervisor checkpoints
+│  ├─ 03-handover-log.md     who touched what, and what the next person must do
+│  ├─ 04-decision-log.md     decisions we made and why (ADR-light)
+│  ├─ 05-meetings/           dated minutes, one file per meeting
+│  └─ 06-submission.md       how this reaches the supervisor, and the pre-submit checklist
+├─ reports/
+│  ├─ final-report.md        the graded report (skeleton — fill it in)
+│  ├─ progress-update.md     template for supervisor check-ins
+│  └─ figures/               figures + their sources
+├─ presentations/            slide deck plan and exports
+├─ src/                      source code
+├─ data/                     small, shareable data only (see data/README.md)
+├─ deliverables/             frozen artefacts actually handed over
+├─ references/               bibliography
+└─ scripts/                  contribution-report generator
 ```
-
-**为什么要分成 `README.md` + `接力记录.md`？**
-`README.md` 写稳定的东西（题目、要求），`接力记录.md` 写不断追加的东西（谁做了什么）。
-两者分开，多人同时改一份作业时几乎不会产生冲突。
-
-### 新建一份作业
-
-```powershell
-scripts\new-homework.cmd -Week 3 -Id lab02 -Title "线性回归与梯度下降" -Due "11-13 23:59"
-```
-
-自动生成 `week03/lab02/README.md` 和 `week03/lab02/接力记录.md`（周次会自动补零）。
-
-> 如果直接跑 `.ps1` 报「在此系统上禁止运行脚本」，用 `.cmd` 那个版本就行——
-> 它已经内置了绕过参数，**不需要**去改系统执行策略。
 
 ---
 
-## 二、第一次加入（3 步）
-
-### 1. 接受邀请
-仓库管理员会在 GitHub 上把你加为 Collaborator，你会收到一封邮件。
-点邮件里的 **View invitation → Accept invitation** 即可。
-（没收到邮件就去 <https://github.com/notifications> 看。）
-
-### 2. 配置 git 身份（只需一次）
+## 4. New member: five-minute setup
 
 ```powershell
-git config --global user.name  "你的名字"
-git config --global user.email "你的GitHub邮箱"
-```
+git config --global user.name  "<Your Name>"
+git config --global user.email "<email tied to your GitHub account>"
 
-> 邮箱必须和你 GitHub 账号里的邮箱一致，否则提交不会算在你名下。
-
-### 3. 克隆仓库
-
-```powershell
-cd C:\你\想放代码的地方
 git clone https://github.com/changxufeng66/7220_Group12.git
 cd 7220_Group12
+git switch -c docs/team-<yourname>          # never work directly on main
 ```
 
-第一次执行时 Windows 会弹出 **Git Credential Manager** 窗口，选
-**Sign in with your browser**，用浏览器登录 GitHub 授权即可。之后就不用再登录了。
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md), then open
+[`docs/03-handover-log.md`](docs/03-handover-log.md) to see what is unclaimed.
+
+> If the clone prompts for credentials, choose **Sign in with your browser**.
 
 ---
 
-## 三、日常接力流程（最常用，背下来）
+## 5. How we work — four rules
 
-### ① 动手前：同步最新代码
-
-```powershell
-git switch main
-git pull
-```
-
-### ② 建一个自己的分支（**不要直接在 main 上改**）
-
-```powershell
-git switch -c feat/w03-lab02-zhangsan
-```
-
-命名规则：`feat/<周>-<作业>-<你的名字拼音>`，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-### ③ 先去 `接力记录.md` 占位
-
-在对应作业的 `接力记录.md` 里加一行，写「我接手哪部分」，**避免两个人做同一块**：
-
-```markdown
-| 2026-11-07 | 张三 | 开始接手：第 3 题推导 + 实验数据 | 进行中 |
-```
-
-### ④ 干活、提交
-
-```powershell
-git add -A
-git commit -m "feat(w03-lab02): 完成第 3 题推导并补充实验数据"
-git push -u origin feat/w03-lab02-zhangsan
-```
-
-### ⑤ 开 Pull Request
-
-push 之后终端会打印一个链接，或者直接去 GitHub 仓库页面，点 **Compare & pull request**，
-模板会自动带出来，填完点 **Create pull request**。
-
-### ⑥ 合并后收尾
-
-PR 被合并（merge）后：
-
-```powershell
-git switch main
-git pull
-git branch -d feat/w03-lab02-zhangsan   # 删除本地分支
-```
+1. **`main` is always presentable.** Everything arrives by pull request, reviewed by one other
+   person. A supervisor may open this repository at any time; `main` should never be broken.
+2. **Claim before you build.** Add a row to [`docs/03-handover-log.md`](docs/03-handover-log.md)
+   before starting, and update it when you stop. Two people on one task is the most expensive
+   mistake available to a group of seven.
+3. **Write so the next person can continue without asking you.** Every handover states what is
+   done, what is not, and where it breaks.
+4. **Documentation is in English.** The supervisor reads it. Commit messages and PRs: English.
+   Team chat can be in any language.
 
 ---
 
-## 四、三条铁律
+## 6. Where the graded deliverables live
 
-| # | 规则 | 为什么 |
-|---|------|--------|
-| 1 | **不在 `main` 上直接改**，一律走分支 + PR | 别人随时能在 main 上拿到可用版本，出错也好回滚 |
-| 2 | **动手前 `git pull`，并先在 `接力记录.md` 占位** | 这是「接力」不撞车的核心：声明在先 |
-| 3 | **一个 PR 只做一件事，小步提交** | 一次改 3000 行没人敢 review，出了问题也定位不到 |
+| Deliverable | Location | Owner | Status |
+|---|---|---|---|
+| Final report (PDF) | `deliverables/` ← built from [`reports/final-report.md`](reports/final-report.md) | `<Name>` | ⚪ not started |
+| Presentation (PDF) | `deliverables/` ← built from [`presentations/`](presentations/) | `<Name>` | ⚪ not started |
+| Working demo / code | `src/` | `<Name>` | ⚪ not started |
+| Division of labour | Appendix A of the report, generated by `scripts/contribution-report.cmd` | `<Name>` | ⚪ not started |
 
----
-
-## 五、Word / PPT / Excel（二进制文件）特别规则
-
-`docx`、`pptx`、`xlsx`、`pdf` 这类文件 git **无法自动合并**——两个人同时改同一份，
-合并时只能整份二选一，其中一人的工作会丢。所以：
-
-1. **同一份二进制文件，同一时间只由一个人修改**，改之前在 `接力记录.md` 写明；
-2. 交接时在 PR 描述里说清楚**「我改了哪几页 / 哪几节」**，让对方不用去 diff；
-3. 多人并行时，**优先写 markdown**，最后统一由一个人导出成 docx/pdf；
-4. 提交前**关掉 Word/Excel**，否则会把 `~$xxx.docx` 锁文件一起传上来
-   （`.gitignore` 已经挡掉了，但养成习惯更好）。
-
-> 超过 50 MB 的文件（视频、数据集、压缩包）不要直接提交，用 GitHub Release
-> 或者网盘，然后在作业 README 里放链接。
+The pre-submission checklist is in [`docs/06-submission.md`](docs/06-submission.md).
+Do not hand anything over before that checklist passes.
 
 ---
 
-## 六、常用命令小抄
+## 7. Timeline
 
-| 我想… | 命令 |
-|-------|------|
-| 看当前改了什么 | `git status` |
-| 看具体改了哪几行 | `git diff` |
-| 拉取别人的最新改动 | `git pull` |
-| 看最近谁提交了什么 | `git log --oneline --graph -15` |
-| 提交后忘了加文件 | `git add 漏掉的文件` → `git commit --amend --no-edit` |
-| 改坏了想丢弃未提交的修改 | `git restore .`（**会丢失改动，慎用**） |
-| 提交信息写错了（还没 push） | `git commit --amend` |
-| 已经 push 了想撤销 | 别自己硬来，见 [docs/常见问题.md](docs/常见问题.md) |
+Milestones, dependencies and supervisor checkpoints: [`docs/02-plan.md`](docs/02-plan.md).
 
----
-
-## 七、遇到问题
-
-- **冲突了 / push 被拒 / 传错文件** → [docs/常见问题.md](docs/常见问题.md)
-- **想认领一份没人做的作业** → 开一个 Issue，用「认领任务」模板
-- **要拉同学进群** → 直接复制 [docs/发给成员的消息.md](docs/发给成员的消息.md)
-- **完全不会 git** → 先照着第三节做一遍，出问题再把报错贴出来
+| Milestone | Due | Exit criterion |
+|---|---|---|
+| M0 Kickoff | `<date>` | Brief agreed, roles assigned, repo set up |
+| M1 Proposal | `<date>` | Supervisor signs off on scope |
+| M2 Midpoint | `<date>` | Core pipeline runs end to end on real data |
+| M3 Report draft | `<date>` | Full draft, all sections present, figures finalised |
+| M4 Submission | `<date>` | Checklist in `docs/06-submission.md` passes |
 
 ---
 
-## 八、仓库管理员（所有者）要做的事
+## 8. Documentation index
 
-见 [docs/管理员清单.md](docs/管理员清单.md)：创建仓库、邀请成员、开启分支保护、合并 PR。
+| If you need to know… | Read |
+|---|---|
+| What we are building and why | [`docs/00-brief.md`](docs/00-brief.md) |
+| Who is responsible for what | [`docs/01-team.md`](docs/01-team.md) |
+| When things are due | [`docs/02-plan.md`](docs/02-plan.md) |
+| What is in progress right now | [`docs/03-handover-log.md`](docs/03-handover-log.md) |
+| Why we chose X over Y | [`docs/04-decision-log.md`](docs/04-decision-log.md) |
+| What was said in the last meeting | [`docs/05-meetings/`](docs/05-meetings/) |
+| How to branch, commit and review | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
+| How to submit to the supervisor | [`docs/06-submission.md`](docs/06-submission.md) |

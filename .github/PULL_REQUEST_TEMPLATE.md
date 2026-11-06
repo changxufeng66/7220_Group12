@@ -1,31 +1,28 @@
-## 改了什么
+## What this PR changes
 
-<!-- 一两句话，说清这个 PR 完成/修正了什么 -->
-
--
-
-## 为什么
-
-<!-- 补完哪道题？修哪个错？对应哪个 Issue？ -->
+<!-- One or two sentences. -->
 
 -
 
-## 怎么验证的
+## Why
 
-<!-- 跑过什么命令、看过哪几页、结果是否符合预期 -->
+<!-- The task, issue, or defect. Link it: Closes #12 -->
 
-- [ ] 本地跑通 / 检查过
-- [ ] 没有误提交无关文件（`git status` 干净）
-- [ ] 没有提交 `~$` 开头的 Office 临时文件
+Closes #
 
-## 接力信息
+## How it was verified
 
-<!-- 这个 PR 合并后，下一步谁接、还差什么；如果全部完成，写「本作业已完成」 -->
+<!-- Commands run, results inspected, pages proofread. "It works" is not verification. -->
 
-- 下一步：
-- 还差：
+- [ ] Runs from a clean clone following `src/README.md`
+- [ ] Tests pass (or: not applicable, because …)
+- [ ] Documentation / report text updated in this PR
+- [ ] No secrets, personal data, or large binaries added
+- [ ] `docs/03-handover-log.md` updated
 
-## 相关
+## What is left
 
-- 作业目录：`week__/____/`
-- 关联 Issue：#
+<!-- Next step and its owner. If the work is complete, write "None — task closed". -->
+
+- Next step:
+- Owner:

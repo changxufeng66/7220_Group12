@@ -1,119 +1,161 @@
-# 贡献规范（CONTRIBUTING）
+# Contributing
 
-这份文件规定「怎么改、怎么命名、怎么提交」，目的是让大家接得上彼此的活。
-规则不多，但请都遵守——尤其是**分支命名**和**提交信息**，它们是别人读懂你改动的唯一线索。
+Seven people, one repository, one supervisor reading it. These rules exist so that work
+survives handovers and so that the commit history is usable evidence of individual
+contribution.
 
 ---
 
-## 1. 分支命名
+## 1. Language
+
+- **Everything committed is in English**: code comments, documentation, commit messages,
+  PR descriptions, issue titles. The supervisor reads this repository.
+- Team chat, and conversation during review, can be in any language.
+
+---
+
+## 2. Branches
 
 ```
-<类型>/w<周>-<作业编号>-<你的名字拼音>
+<type>/<area>-<your-name>
 ```
 
-| 类型 | 用在什么时候 |
-|------|--------------|
-| `feat` | 新做一部分作业 |
-| `fix` | 修正别人（或自己）已提交的内容里的错误 |
-| `docs` | 只改文档、说明、README |
-| `exp` | 试验性内容（可能不合并，先存着） |
+| Type | Use |
+|---|---|
+| `feat` | New functionality or a new section of the report |
+| `fix` | Correcting something already on `main` |
+| `docs` | Documentation, report text, figures |
+| `exp` | Experiments that may never be merged |
 
-示例：
+Examples:
 
 ```
-feat/w03-lab02-zhangsan
-fix/w02-hw01-lisi          # 修正 w02 作业里的错误
-docs/w03-lab02-wangwu      # 只是补充说明
+feat/modelling-alice
+docs/report-evaluation-bob
+fix/pipeline-null-handling-chen
 ```
 
-**永远从最新的 `main` 拉分支**，不要从别人的分支拉（会带上别人的未完成改动）。
+Always branch from an up-to-date `main`:
 
 ```powershell
 git switch main
 git pull
-git switch -c feat/w03-lab02-zhangsan
+git switch -c feat/modelling-alice
 ```
+
+Never branch from someone else's unfinished branch — you will inherit their half-finished work.
 
 ---
 
-## 2. 提交信息
-
-格式：
+## 3. Commits
 
 ```
-<类型>(<范围>): <一句话说明>
+<type>(<area>): <what changed>
 ```
 
-- 类型：`feat` / `fix` / `docs` / `refactor` / `chore`
-- 范围：作业标识，如 `w03-lab02`
-- 说明：**说清「做了什么」**，用中文没问题，别写 "update"、"修改" 这种没信息量的
+- `type`: `feat` / `fix` / `docs` / `refactor` / `test` / `chore`
+- `area`: the workstream — `pipeline`, `model`, `eval`, `report`, `slides`, `repo`
+- Subject in the imperative mood, no full stop, under 72 characters
 
-好例子：
+Good:
 
 ```
-feat(w03-lab02): 完成第 3 题梯度推导
-fix(w02-hw01): 修正第 2 问里 RMS 与 MAE 的混淆
-docs(w04-lab01): 补充实验环境说明
+feat(pipeline): add deduplication step before tokenisation
+fix(eval): report macro-F1 instead of micro-F1
+docs(report): draft the limitations section
 ```
 
-坏例子（别这样）：
+Bad — these make the history useless:
 
 ```
 update
-改一下
-111
+changes
+final version
+try again
 ```
 
-一次提交只做一件事。如果你发现自己在写「并且」「顺便」，就该拆成两个提交。
+One logical change per commit. If the subject needs "and", split the commit.
+
+If a commit needs explanation, put it in the body: why you did it, what you tried first,
+what is still wrong.
 
 ---
 
-## 3. Pull Request 要求
+## 4. Pull requests
 
-开 PR 时模板会自动出现，请把四项都填上：
+The PR template will prompt you. All four parts are mandatory:
 
-1. **改了什么** —— 一两句话
-2. **为什么** —— 是补完哪道题、修哪个错
-3. **怎么验证的** —— 跑过什么、看过哪几页、结果对不对
-4. **接力信息** —— 下一步谁接、还差什么
+1. **What changed** — one or two sentences
+2. **Why** — the task or defect it addresses; link the issue
+3. **How it was verified** — commands run, results checked, pages proofread
+4. **What is left** — next step and who owns it
 
-PR 标题和分支名保持一致的风格：
+Rules:
 
-```
-feat(w03-lab02): 完成第 3 题推导并补充实验数据
-```
-
-**一个 PR 只做一件事。** 不要在一个 PR 里既补作业 2 又开作业 3。
-
----
-
-## 4. 评审与合并
-
-- 谁都可以 review 任何人的 PR，**至少一个人看过再合并**（小改动自己合也行，但要在 `接力记录.md` 里说明）
-- 合并方式统一用 **Squash and merge**（把分支上的零碎提交压成一条，`main` 的历史才干净）
-- 合并后**删掉远程分支**（GitHub 上有 Delete branch 按钮）
-- 合并完记得在 `接力记录.md` 里把状态改成 `已完成`
+- **One concern per PR.** A PR that fixes the pipeline *and* rewrites a report section cannot be reviewed properly; split it.
+- **At least one review** from someone who did not write the code or text.
+- Review within **24 hours** — someone is blocked on you otherwise.
+- Merge with **Squash and merge**, then **delete the branch**.
+- Never merge your own PR without a second pair of eyes, except for trivial typo fixes.
 
 ---
 
-## 5. 文件放置约定
+## 5. Definition of Done
 
-| 内容 | 放哪里 |
-|------|--------|
-| 作业正文 / 报告 | `weekNN/<作业编号>/` 下，文件名用中文或英文都行，别用空格 |
-| 代码 | `weekNN/<作业编号>/src/` |
-| 数据 / 图片 | `weekNN/<作业编号>/assets/` |
-| 临时草稿、自己不想共享的东西 | 放仓库外，或 `.gitignore` 里已忽略的 `/scratch/` |
+A task is done when:
 
-文件名**不要带空格**（`第 3 题.docx` → `第3题.docx`），空格在命令行里很麻烦。
+- [ ] It works from a clean clone following `src/README.md` — not just on your machine
+- [ ] Relevant documentation or report text is updated in the same PR
+- [ ] `docs/03-handover-log.md` has a row describing the final state
+- [ ] CI/tests pass, or the PR explains why they do not apply
+- [ ] Someone else has reviewed it
+
+"Merged" and "done" are not the same thing. If a task leaves loose ends, it goes back in the
+handover log as `carried over`, with the loose ends named.
 
 ---
 
-## 6. 接手别人的活之前
+## 6. Handover rules
 
-1. `git pull` 拿到最新
-2. 打开那份作业的 `接力记录.md`，看**最后一行**：上次谁做的、做到哪、下一步是什么
-3. 追加一行：`| 日期 | 我 | 接手：xxx | 进行中 |`
-4. 如果上次的人还没做完就想接手，**先在 Issue 或群里问一句**，别直接覆盖
+Before you stop working on anything — end of day, end of week, going to sleep before a
+deadline — add a row to [`docs/03-handover-log.md`](docs/03-handover-log.md) that answers:
 
-交接的完整玩法见 [docs/接力规则.md](docs/接力规则.md)。
+- Where the work lives (branch, file, notebook)
+- How to run or open it
+- What is broken or unverified
+- What the next concrete step is
+
+Assume the next reader is tired, has not seen your screen, and has 20 minutes.
+
+---
+
+## 7. What must never be committed
+
+| Never | Instead |
+|---|---|
+| Passwords, API keys, tokens | Environment variables; documented in `src/README.md` |
+| Personal or confidential data | Aggregated/synthetic samples in `data/` |
+| Files over ~50 MB | GitHub Release or shared drive; link from `data/README.md` |
+| Supervisor's unpublished material | Keep it out of git unless they agree |
+| Course materials that forbid redistribution | Cite them; do not copy them in |
+
+If you commit a secret by accident, tell the project lead immediately. Removing it in a later
+commit does **not** remove it from history, and the credential must be revoked.
+
+---
+
+## 8. Academic integrity
+
+This repository is a record of the group's own work.
+
+- **Cite every source** you use, in `references/references.bib`.
+- **Do not copy** code or text from other groups, from previous years, or from the internet
+  without attribution — including code that "we rewrote a bit".
+- **Declare AI assistance** if the course requires it. Put the declaration in
+  `reports/final-report.md` (Appendix C) and keep it accurate. Undisclosed use is treated as
+  misconduct at HKU, and the commit history makes it visible.
+- **Be able to explain your own contribution.** Each member should be able to walk the
+  supervisor through what they wrote, why, and what they would do differently.
+
+The commit history and `docs/03-handover-log.md` are the honest record of who did what. Do not
+inflate them; do not let one member's work appear unattributed either.

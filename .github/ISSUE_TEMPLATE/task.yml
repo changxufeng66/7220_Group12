@@ -1,0 +1,75 @@
+name: Task
+description: Claim or define a piece of work
+title: "[Task] "
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check `docs/03-handover-log.md` first — the task may already be claimed or half done.
+
+  - type: input
+    id: workstream
+    attributes:
+      label: Workstream
+      description: pipeline / model / eval / report / slides / repo
+      placeholder: model
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is in, and what is explicitly out. Specific beats complete.
+      placeholder: |
+        In: calibration of the classifier on the held-out split.
+        Out: retraining the base model (that is #14).
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Starting point
+      options:
+        - New work
+        - Taking over an unfinished task
+        - Fixing something already merged
+    validations:
+      required: true
+
+  - type: input
+    id: owner
+    attributes:
+      label: Owner
+      placeholder: "@handle"
+    validations:
+      required: true
+
+  - type: input
+    id: due
+    attributes:
+      label: Target date
+      placeholder: 2026-11-20
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      description: How will a reviewer know this is finished?
+      placeholder: Calibration curve + ECE number in the eval notebook, and a paragraph in §6 of the report.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: I have added a row to `docs/03-handover-log.md`
+          required: true
+        - label: I will work on a branch, not on `main`
+          required: true

@@ -1,0 +1,65 @@
+name: Bug or blocker
+description: Something is broken, or you are stuck
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Code / pipeline
+        - Data
+        - Report or figures
+        - Repository / git
+        - Environment / setup
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: From a clean clone. Numbered, in order.
+      placeholder: |
+        1. git clone …
+        2. cd src && python main.py --config base
+        3. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      placeholder: |
+        Expected: run finishes and writes results.csv
+        Actual: KeyError 'label' after 4 minutes
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Full error output
+      description: Include the first lines of the traceback, not only the last.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you already tried
+    validations:
+      required: false
+
+  - type: dropdown
+    id: blocking
+    attributes:
+      label: Is this blocking someone else?
+      options:
+        - "Yes — someone cannot proceed"
+        - "No"
+    validations:
+      required: true
