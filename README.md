@@ -1,30 +1,40 @@
-# Group 12 — `<Project Title>`
+# Group 12 — Pet Recommendation Expert System with a Desktop Pet Companion
 
-Final project for **`<7220 — Course Title>`**, The University of Hong Kong.
-Team of seven · Supervisor: **`<Professor Name>`** · `<Semester, Year>`
+Group project for **IDAT7215 Computer Programming for Product Development and Applications**,
+The University of Hong Kong, 2026/27 Semester 1.
+Team of seven · Instructor: **`<Professor Name>`**
 
 | | |
 |---|---|
-| **Status** | 🟡 Setup — scaffolding in place, project brief being drafted |
-| **Final submission** | `<YYYY-MM-DD>` 23:59 HKT |
-| **Graded deliverables** | [`deliverables/`](deliverables/) |
-| **Final report** | [`reports/final-report.md`](reports/final-report.md) |
+| **Topic** | Course topic 2 — *write a Python script to develop an expert system* |
+| **Status** | 🟡 Week 1 — brief being frozen, engine skeleton in progress |
+| **Report due** | **30 November 2026, 17:00** (Moodle + Turnitin, group leader only) |
+| **Presentation** | **19–26 November 2026** · 15 min talk + 5 min Q&A, all members present |
+| **Report length** | 2,000–4,000 words (+10% tolerance, then a 10% mark penalty) |
+| **Graded deliverables** | [`deliverables/`](deliverables/) · code + readme, zipped |
 
-> **First task for the team:** replace every `<...>` placeholder in this file and in
-> [`docs/00-brief.md`](docs/00-brief.md). The document is the first thing the supervisor opens —
-> an unfinished README reads as an unfinished project.
+> **The constraint that shapes everything:** 40% of the mark is *quality and quantity of
+> implementation*, and the guideline requires us to state exactly which parts are open-source and
+> which are ours. [`docs/reference-projects.md`](docs/reference-projects.md) records how the
+> reference projects are used — as architecture, never as pasted code.
 
 ---
 
 ## 1. What we are building
 
-**Problem.** `<Two or three sentences. What is broken, for whom, and why does it matter?
-Write it so a reader outside the course can follow.>`
+**Problem.** Choosing a pet is a decision people routinely get wrong: the animal's adult size,
+activity needs, lifespan, noise, and cost have to match a household's space, budget and daily
+routine, and most advice online is generic or written for a different country's climate and
+housing. A short structured consultation with an expert is what actually prevents mismatches —
+and that expertise, in a form a user can run on their own desktop, does not exist.
 
-**What we deliver.** `<One or two sentences: the artefact — system, analysis, prototype — and
-the headline result.>`
+**What we deliver.** A Python expert system that interviews the user, reasons over a knowledge
+base of animal and breed traits, and returns ranked recommendations **with a justification for
+each** — wrapped in a desktop-pet companion that reacts to the consultation in real time, so the
+dialogue feels like talking to a small character rather than filling in a form.
 
-**Why this team.** `<One sentence on the skills the seven of us bring.>`
+**Why this team.** Seven people across data, front-end, rule design, evaluation and writing,
+working in one repository with a documented division of labour.`
 
 > Keep this section under 150 words. If you cannot state the problem in three sentences,
 > the scope is not settled yet — that is what `docs/00-brief.md` is for.
@@ -61,7 +71,8 @@ Who is working on what, right now, is in [`docs/03-handover-log.md`](docs/03-han
 │  ├─ 03-handover-log.md     who touched what, and what the next person must do
 │  ├─ 04-decision-log.md     decisions we made and why (ADR-light)
 │  ├─ 05-meetings/           dated minutes, one file per meeting
-│  └─ 06-submission.md       how this reaches the supervisor, and the pre-submit checklist
+│  ├─ 06-submission.md       how this reaches the supervisor, and the pre-submit checklist
+│  └─ reference-projects.md  prior art: what exists, what we borrow, what we build
 ├─ reports/
 │  ├─ final-report.md        the graded report (skeleton — fill it in)
 │  ├─ progress-update.md     template for supervisor check-ins
@@ -147,4 +158,5 @@ Milestones, dependencies and supervisor checkpoints: [`docs/02-plan.md`](docs/02
 | Why we chose X over Y | [`docs/04-decision-log.md`](docs/04-decision-log.md) |
 | What was said in the last meeting | [`docs/05-meetings/`](docs/05-meetings/) |
 | How to branch, commit and review | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
+| What prior art exists and what we borrow | [`docs/reference-projects.md`](docs/reference-projects.md) |
 | How to submit to the supervisor | [`docs/06-submission.md`](docs/06-submission.md) |
